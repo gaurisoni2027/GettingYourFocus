@@ -4,35 +4,50 @@ import path from "path";
 import { createServer } from "./server";
 
 // https://vitejs.dev/config/
-export default defineConfig(({ mode }) => ({
+export default defineConfig(() => ({
+  // 🔥 Tell Vite your frontend lives inside /client
+  root: path.resolve(__dirname, "client"),
+
   server: {
     host: "::",
     port: 8080,
     fs: {
-      allow: ["./client", "./shared"],
-      deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**", "server/**"],
+      allow: [
+        path.resolve(__dirname, "client"),
+        path.resolve(__dirname, "shared"),
+      ],
+      deny: [
+        ".env",
+        ".env.*",
+        "*.{crt,pem}",
+        "**/.git/**",
+        "server/**",
+      ],
     },
   },
+
   build: {
-    outDir: "dist/spa",
+    outDir: path.resolve(__dirname, "dist/spa"),
+    emptyOutDir: true,
   },
+
   plugins: [react(), expressPlugin()],
+
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./client"),
-      "@shared": path.resolve(__dirname, "./shared"),
+      "@": path.resolve(__dirname, "client"),
+      "@shared": path.resolve(__dirname, "shared"),
     },
   },
 }));
 
+// 🔹 Express middleware plugin
 function expressPlugin(): Plugin {
   return {
     name: "express-plugin",
-    apply: "serve", // Only apply during development (serve mode)
+    apply: "serve", // only in dev
     configureServer(server) {
       const app = createServer();
-
-      // Add Express app as middleware to Vite dev server
       server.middlewares.use(app);
     },
   };
