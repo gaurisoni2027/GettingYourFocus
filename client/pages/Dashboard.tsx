@@ -1,5 +1,15 @@
 import { StatsCards } from "@/components/StatsCards";
 import { TaskList } from "@/components/TaskList";
+import { StreakWidget } from "@/components/StreakWidget";
+
+
+const getGreeting = () => {
+  const hour = new Date().getHours();
+
+  if (hour < 12) return "Good Morning";
+  if (hour < 18) return "Good Afternoon";
+  return "Good Evening";
+};
 
 export default function Dashboard() {
   return (
@@ -15,8 +25,12 @@ export default function Dashboard() {
       {/* Stats Cards */}
       <StatsCards />
 
+      {/* Streak Widget */}
+      <StreakWidget />
+
       {/* Task List */}
       <TaskList />
+
     </div>
   );
 }
