@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Plus, Edit2, Trash2, ChevronDown, Toggle2 } from "lucide-react";
+import { Search, Plus, Edit2, Trash2, ChevronDown, CheckCircle2, Circle } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Task {
@@ -178,14 +178,11 @@ export const TaskList = () => {
                   onClick={() => toggleTask(task.id)}
                   className="mt-1 p-1.5 rounded-lg hover:bg-sidebar-accent transition-colors flex-shrink-0"
                 >
-                  <Toggle2
-                    className={cn(
-                      "w-5 h-5 transition-colors",
-                      task.completed
-                        ? "text-primary"
-                        : "text-muted-foreground"
-                    )}
-                  />
+                  {task.completed ? (
+                    <CheckCircle2 className="w-5 h-5 text-primary transition-colors" />
+                  ) : (
+                    <Circle className="w-5 h-5 text-muted-foreground transition-colors hover:text-foreground" />
+                  )}
                 </button>
 
                 {/* Content */}
