@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Search, Plus, Edit2, Trash2, ChevronDown, CheckCircle2, Circle } from "lucide-react";
+import { Search, Plus, Edit2, Trash2, ChevronDown, CheckCircle2, Circle, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface Task {
@@ -224,8 +224,30 @@ export const TaskList = () => {
             </div>
           ))
         ) : (
-          <div className="text-center py-12">
-            <p className="text-muted-foreground">No tasks found</p>
+          <div className="flex flex-col items-center justify-center py-20 px-4">
+            {/* Illustration Placeholder */}
+            <div className="mb-6 p-4 rounded-2xl bg-gradient-to-br from-indigo-500/10 to-teal-500/10 border border-indigo-500/20">
+              <div className="flex items-center justify-center">
+                <Zap className="w-12 h-12 text-indigo-400" strokeWidth={1.5} />
+              </div>
+            </div>
+
+            {/* Heading */}
+            <h3 className="text-2xl font-bold text-foreground mb-2">
+              No focus units yet.
+            </h3>
+
+            {/* Subtext */}
+            <p className="text-muted-foreground max-w-sm text-center mb-8">
+              Start by creating your first task and take control of your
+              productivity.
+            </p>
+
+            {/* Create First Task Button */}
+            <button className="flex items-center gap-2 bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-200 shadow-lg hover:shadow-indigo-500/30">
+              <Plus className="w-5 h-5" />
+              Create First Task
+            </button>
           </div>
         )}
       </div>
